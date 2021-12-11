@@ -1,0 +1,1023 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ENDIF
+    SUB
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PUBLIC CLASS VARIABLE declaration_list END CLASS
+Rule 2     declaration_list -> declaration_list declaration
+Rule 3     declaration_list -> declaration
+Rule 4     declaration -> var_declaration
+Rule 5     declaration -> selection_stmt
+Rule 6     var_declaration -> DIM VARIABLE AS tipo_dato
+Rule 7     var_declaration -> DIM VARIABLE
+Rule 8     tipo_dato -> STRING
+Rule 9     tipo_dato -> DOUBLE
+Rule 10    selection_stmt -> IF expression THEN statement_list END IF
+Rule 11    selection_stmt -> IF expression THEN statement_list selection END IF
+Rule 12    selection -> ELSEIF expression THEN statement_list
+Rule 13    selection -> ELSEIF expression THEN statement_list selection
+Rule 14    statement_list -> statement_list statement
+Rule 15    statement_list -> empty
+Rule 16    statement -> expression
+Rule 17    expression -> var EQUAL expression
+Rule 18    expression -> simple_expression
+Rule 19    expression -> expression AND expression
+Rule 20    simple_expression -> additive_expression relop additive_expression
+Rule 21    simple_expression -> additive_expression
+Rule 22    relop -> LESS
+Rule 23    relop -> LESSEQUAL
+Rule 24    relop -> GREATER
+Rule 25    relop -> GREATEREQUAL
+Rule 26    additive_expression -> additive_expression addop term
+Rule 27    additive_expression -> term
+Rule 28    var -> VARIABLE
+Rule 29    addop -> PLUS
+Rule 30    addop -> MINUS
+Rule 31    term -> term mulop factor
+Rule 32    term -> factor
+Rule 33    mulop -> TIMES
+Rule 34    mulop -> DIVIDE
+Rule 35    factor -> var
+Rule 36    factor -> NUMERO
+Rule 37    factor -> TEXTO
+Rule 38    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 19
+AS                   : 6
+CLASS                : 1 1
+DIM                  : 6 7
+DIVIDE               : 34
+DOUBLE               : 9
+ELSEIF               : 12 13
+END                  : 1 10 11
+ENDIF                : 
+EQUAL                : 17
+GREATER              : 24
+GREATEREQUAL         : 25
+IF                   : 10 10 11 11
+LESS                 : 22
+LESSEQUAL            : 23
+MINUS                : 30
+NUMERO               : 36
+PLUS                 : 29
+PUBLIC               : 1
+STRING               : 8
+SUB                  : 
+TEXTO                : 37
+THEN                 : 10 11 12 13
+TIMES                : 33
+VARIABLE             : 1 6 7 28
+error                : 
+
+Nonterminals, with rules where they appear
+
+additive_expression  : 20 20 21 26
+addop                : 26
+declaration          : 2 3
+declaration_list     : 1 2
+empty                : 15
+expression           : 10 11 12 13 16 17 19 19
+factor               : 31 32
+mulop                : 31
+program              : 0
+relop                : 20
+selection            : 11 13
+selection_stmt       : 5
+simple_expression    : 18
+statement            : 14
+statement_list       : 10 11 12 13 14
+term                 : 26 27 31
+tipo_dato            : 6
+var                  : 17 35
+var_declaration      : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PUBLIC CLASS VARIABLE declaration_list END CLASS
+
+    PUBLIC          shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PUBLIC . CLASS VARIABLE declaration_list END CLASS
+
+    CLASS           shift and go to state 3
+
+
+state 3
+
+    (1) program -> PUBLIC CLASS . VARIABLE declaration_list END CLASS
+
+    VARIABLE        shift and go to state 4
+
+
+state 4
+
+    (1) program -> PUBLIC CLASS VARIABLE . declaration_list END CLASS
+    (2) declaration_list -> . declaration_list declaration
+    (3) declaration_list -> . declaration
+    (4) declaration -> . var_declaration
+    (5) declaration -> . selection_stmt
+    (6) var_declaration -> . DIM VARIABLE AS tipo_dato
+    (7) var_declaration -> . DIM VARIABLE
+    (10) selection_stmt -> . IF expression THEN statement_list END IF
+    (11) selection_stmt -> . IF expression THEN statement_list selection END IF
+
+    DIM             shift and go to state 9
+    IF              shift and go to state 10
+
+    declaration_list               shift and go to state 5
+    declaration                    shift and go to state 6
+    var_declaration                shift and go to state 7
+    selection_stmt                 shift and go to state 8
+
+state 5
+
+    (1) program -> PUBLIC CLASS VARIABLE declaration_list . END CLASS
+    (2) declaration_list -> declaration_list . declaration
+    (4) declaration -> . var_declaration
+    (5) declaration -> . selection_stmt
+    (6) var_declaration -> . DIM VARIABLE AS tipo_dato
+    (7) var_declaration -> . DIM VARIABLE
+    (10) selection_stmt -> . IF expression THEN statement_list END IF
+    (11) selection_stmt -> . IF expression THEN statement_list selection END IF
+
+    END             shift and go to state 11
+    DIM             shift and go to state 9
+    IF              shift and go to state 10
+
+    declaration                    shift and go to state 12
+    var_declaration                shift and go to state 7
+    selection_stmt                 shift and go to state 8
+
+state 6
+
+    (3) declaration_list -> declaration .
+
+    END             reduce using rule 3 (declaration_list -> declaration .)
+    DIM             reduce using rule 3 (declaration_list -> declaration .)
+    IF              reduce using rule 3 (declaration_list -> declaration .)
+
+
+state 7
+
+    (4) declaration -> var_declaration .
+
+    END             reduce using rule 4 (declaration -> var_declaration .)
+    DIM             reduce using rule 4 (declaration -> var_declaration .)
+    IF              reduce using rule 4 (declaration -> var_declaration .)
+
+
+state 8
+
+    (5) declaration -> selection_stmt .
+
+    END             reduce using rule 5 (declaration -> selection_stmt .)
+    DIM             reduce using rule 5 (declaration -> selection_stmt .)
+    IF              reduce using rule 5 (declaration -> selection_stmt .)
+
+
+state 9
+
+    (6) var_declaration -> DIM . VARIABLE AS tipo_dato
+    (7) var_declaration -> DIM . VARIABLE
+
+    VARIABLE        shift and go to state 13
+
+
+state 10
+
+    (10) selection_stmt -> IF . expression THEN statement_list END IF
+    (11) selection_stmt -> IF . expression THEN statement_list selection END IF
+    (17) expression -> . var EQUAL expression
+    (18) expression -> . simple_expression
+    (19) expression -> . expression AND expression
+    (28) var -> . VARIABLE
+    (20) simple_expression -> . additive_expression relop additive_expression
+    (21) simple_expression -> . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+
+    VARIABLE        shift and go to state 17
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+
+    expression                     shift and go to state 14
+    var                            shift and go to state 15
+    simple_expression              shift and go to state 16
+    additive_expression            shift and go to state 18
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+
+state 11
+
+    (1) program -> PUBLIC CLASS VARIABLE declaration_list END . CLASS
+
+    CLASS           shift and go to state 23
+
+
+state 12
+
+    (2) declaration_list -> declaration_list declaration .
+
+    END             reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    DIM             reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    IF              reduce using rule 2 (declaration_list -> declaration_list declaration .)
+
+
+state 13
+
+    (6) var_declaration -> DIM VARIABLE . AS tipo_dato
+    (7) var_declaration -> DIM VARIABLE .
+
+    AS              shift and go to state 24
+    END             reduce using rule 7 (var_declaration -> DIM VARIABLE .)
+    DIM             reduce using rule 7 (var_declaration -> DIM VARIABLE .)
+    IF              reduce using rule 7 (var_declaration -> DIM VARIABLE .)
+
+
+state 14
+
+    (10) selection_stmt -> IF expression . THEN statement_list END IF
+    (11) selection_stmt -> IF expression . THEN statement_list selection END IF
+    (19) expression -> expression . AND expression
+
+    THEN            shift and go to state 25
+    AND             shift and go to state 26
+
+
+state 15
+
+    (17) expression -> var . EQUAL expression
+    (35) factor -> var .
+
+    EQUAL           shift and go to state 27
+    TIMES           reduce using rule 35 (factor -> var .)
+    DIVIDE          reduce using rule 35 (factor -> var .)
+    LESS            reduce using rule 35 (factor -> var .)
+    LESSEQUAL       reduce using rule 35 (factor -> var .)
+    GREATER         reduce using rule 35 (factor -> var .)
+    GREATEREQUAL    reduce using rule 35 (factor -> var .)
+    PLUS            reduce using rule 35 (factor -> var .)
+    MINUS           reduce using rule 35 (factor -> var .)
+    THEN            reduce using rule 35 (factor -> var .)
+    AND             reduce using rule 35 (factor -> var .)
+    END             reduce using rule 35 (factor -> var .)
+    ELSEIF          reduce using rule 35 (factor -> var .)
+    VARIABLE        reduce using rule 35 (factor -> var .)
+    NUMERO          reduce using rule 35 (factor -> var .)
+    TEXTO           reduce using rule 35 (factor -> var .)
+
+
+state 16
+
+    (18) expression -> simple_expression .
+
+    THEN            reduce using rule 18 (expression -> simple_expression .)
+    AND             reduce using rule 18 (expression -> simple_expression .)
+    END             reduce using rule 18 (expression -> simple_expression .)
+    ELSEIF          reduce using rule 18 (expression -> simple_expression .)
+    VARIABLE        reduce using rule 18 (expression -> simple_expression .)
+    NUMERO          reduce using rule 18 (expression -> simple_expression .)
+    TEXTO           reduce using rule 18 (expression -> simple_expression .)
+
+
+state 17
+
+    (28) var -> VARIABLE .
+
+    EQUAL           reduce using rule 28 (var -> VARIABLE .)
+    TIMES           reduce using rule 28 (var -> VARIABLE .)
+    DIVIDE          reduce using rule 28 (var -> VARIABLE .)
+    LESS            reduce using rule 28 (var -> VARIABLE .)
+    LESSEQUAL       reduce using rule 28 (var -> VARIABLE .)
+    GREATER         reduce using rule 28 (var -> VARIABLE .)
+    GREATEREQUAL    reduce using rule 28 (var -> VARIABLE .)
+    PLUS            reduce using rule 28 (var -> VARIABLE .)
+    MINUS           reduce using rule 28 (var -> VARIABLE .)
+    THEN            reduce using rule 28 (var -> VARIABLE .)
+    AND             reduce using rule 28 (var -> VARIABLE .)
+    END             reduce using rule 28 (var -> VARIABLE .)
+    ELSEIF          reduce using rule 28 (var -> VARIABLE .)
+    VARIABLE        reduce using rule 28 (var -> VARIABLE .)
+    NUMERO          reduce using rule 28 (var -> VARIABLE .)
+    TEXTO           reduce using rule 28 (var -> VARIABLE .)
+
+
+state 18
+
+    (20) simple_expression -> additive_expression . relop additive_expression
+    (21) simple_expression -> additive_expression .
+    (26) additive_expression -> additive_expression . addop term
+    (22) relop -> . LESS
+    (23) relop -> . LESSEQUAL
+    (24) relop -> . GREATER
+    (25) relop -> . GREATEREQUAL
+    (29) addop -> . PLUS
+    (30) addop -> . MINUS
+
+    THEN            reduce using rule 21 (simple_expression -> additive_expression .)
+    AND             reduce using rule 21 (simple_expression -> additive_expression .)
+    END             reduce using rule 21 (simple_expression -> additive_expression .)
+    ELSEIF          reduce using rule 21 (simple_expression -> additive_expression .)
+    VARIABLE        reduce using rule 21 (simple_expression -> additive_expression .)
+    NUMERO          reduce using rule 21 (simple_expression -> additive_expression .)
+    TEXTO           reduce using rule 21 (simple_expression -> additive_expression .)
+    LESS            shift and go to state 30
+    LESSEQUAL       shift and go to state 31
+    GREATER         shift and go to state 32
+    GREATEREQUAL    shift and go to state 33
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+
+    relop                          shift and go to state 28
+    addop                          shift and go to state 29
+
+state 19
+
+    (27) additive_expression -> term .
+    (31) term -> term . mulop factor
+    (33) mulop -> . TIMES
+    (34) mulop -> . DIVIDE
+
+    LESS            reduce using rule 27 (additive_expression -> term .)
+    LESSEQUAL       reduce using rule 27 (additive_expression -> term .)
+    GREATER         reduce using rule 27 (additive_expression -> term .)
+    GREATEREQUAL    reduce using rule 27 (additive_expression -> term .)
+    PLUS            reduce using rule 27 (additive_expression -> term .)
+    MINUS           reduce using rule 27 (additive_expression -> term .)
+    THEN            reduce using rule 27 (additive_expression -> term .)
+    AND             reduce using rule 27 (additive_expression -> term .)
+    END             reduce using rule 27 (additive_expression -> term .)
+    ELSEIF          reduce using rule 27 (additive_expression -> term .)
+    VARIABLE        reduce using rule 27 (additive_expression -> term .)
+    NUMERO          reduce using rule 27 (additive_expression -> term .)
+    TEXTO           reduce using rule 27 (additive_expression -> term .)
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+
+    mulop                          shift and go to state 36
+
+state 20
+
+    (32) term -> factor .
+
+    TIMES           reduce using rule 32 (term -> factor .)
+    DIVIDE          reduce using rule 32 (term -> factor .)
+    LESS            reduce using rule 32 (term -> factor .)
+    LESSEQUAL       reduce using rule 32 (term -> factor .)
+    GREATER         reduce using rule 32 (term -> factor .)
+    GREATEREQUAL    reduce using rule 32 (term -> factor .)
+    PLUS            reduce using rule 32 (term -> factor .)
+    MINUS           reduce using rule 32 (term -> factor .)
+    THEN            reduce using rule 32 (term -> factor .)
+    AND             reduce using rule 32 (term -> factor .)
+    END             reduce using rule 32 (term -> factor .)
+    ELSEIF          reduce using rule 32 (term -> factor .)
+    VARIABLE        reduce using rule 32 (term -> factor .)
+    NUMERO          reduce using rule 32 (term -> factor .)
+    TEXTO           reduce using rule 32 (term -> factor .)
+
+
+state 21
+
+    (36) factor -> NUMERO .
+
+    TIMES           reduce using rule 36 (factor -> NUMERO .)
+    DIVIDE          reduce using rule 36 (factor -> NUMERO .)
+    LESS            reduce using rule 36 (factor -> NUMERO .)
+    LESSEQUAL       reduce using rule 36 (factor -> NUMERO .)
+    GREATER         reduce using rule 36 (factor -> NUMERO .)
+    GREATEREQUAL    reduce using rule 36 (factor -> NUMERO .)
+    PLUS            reduce using rule 36 (factor -> NUMERO .)
+    MINUS           reduce using rule 36 (factor -> NUMERO .)
+    THEN            reduce using rule 36 (factor -> NUMERO .)
+    AND             reduce using rule 36 (factor -> NUMERO .)
+    END             reduce using rule 36 (factor -> NUMERO .)
+    ELSEIF          reduce using rule 36 (factor -> NUMERO .)
+    VARIABLE        reduce using rule 36 (factor -> NUMERO .)
+    NUMERO          reduce using rule 36 (factor -> NUMERO .)
+    TEXTO           reduce using rule 36 (factor -> NUMERO .)
+
+
+state 22
+
+    (37) factor -> TEXTO .
+
+    TIMES           reduce using rule 37 (factor -> TEXTO .)
+    DIVIDE          reduce using rule 37 (factor -> TEXTO .)
+    LESS            reduce using rule 37 (factor -> TEXTO .)
+    LESSEQUAL       reduce using rule 37 (factor -> TEXTO .)
+    GREATER         reduce using rule 37 (factor -> TEXTO .)
+    GREATEREQUAL    reduce using rule 37 (factor -> TEXTO .)
+    PLUS            reduce using rule 37 (factor -> TEXTO .)
+    MINUS           reduce using rule 37 (factor -> TEXTO .)
+    THEN            reduce using rule 37 (factor -> TEXTO .)
+    AND             reduce using rule 37 (factor -> TEXTO .)
+    END             reduce using rule 37 (factor -> TEXTO .)
+    ELSEIF          reduce using rule 37 (factor -> TEXTO .)
+    VARIABLE        reduce using rule 37 (factor -> TEXTO .)
+    NUMERO          reduce using rule 37 (factor -> TEXTO .)
+    TEXTO           reduce using rule 37 (factor -> TEXTO .)
+
+
+state 23
+
+    (1) program -> PUBLIC CLASS VARIABLE declaration_list END CLASS .
+
+    $end            reduce using rule 1 (program -> PUBLIC CLASS VARIABLE declaration_list END CLASS .)
+
+
+state 24
+
+    (6) var_declaration -> DIM VARIABLE AS . tipo_dato
+    (8) tipo_dato -> . STRING
+    (9) tipo_dato -> . DOUBLE
+
+    STRING          shift and go to state 40
+    DOUBLE          shift and go to state 41
+
+    tipo_dato                      shift and go to state 39
+
+state 25
+
+    (10) selection_stmt -> IF expression THEN . statement_list END IF
+    (11) selection_stmt -> IF expression THEN . statement_list selection END IF
+    (14) statement_list -> . statement_list statement
+    (15) statement_list -> . empty
+    (38) empty -> .
+
+    END             reduce using rule 38 (empty -> .)
+    ELSEIF          reduce using rule 38 (empty -> .)
+    VARIABLE        reduce using rule 38 (empty -> .)
+    NUMERO          reduce using rule 38 (empty -> .)
+    TEXTO           reduce using rule 38 (empty -> .)
+
+    statement_list                 shift and go to state 42
+    empty                          shift and go to state 43
+
+state 26
+
+    (19) expression -> expression AND . expression
+    (17) expression -> . var EQUAL expression
+    (18) expression -> . simple_expression
+    (19) expression -> . expression AND expression
+    (28) var -> . VARIABLE
+    (20) simple_expression -> . additive_expression relop additive_expression
+    (21) simple_expression -> . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+
+    VARIABLE        shift and go to state 17
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+
+    expression                     shift and go to state 44
+    var                            shift and go to state 15
+    simple_expression              shift and go to state 16
+    additive_expression            shift and go to state 18
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+
+state 27
+
+    (17) expression -> var EQUAL . expression
+    (17) expression -> . var EQUAL expression
+    (18) expression -> . simple_expression
+    (19) expression -> . expression AND expression
+    (28) var -> . VARIABLE
+    (20) simple_expression -> . additive_expression relop additive_expression
+    (21) simple_expression -> . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+
+    VARIABLE        shift and go to state 17
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+
+    var                            shift and go to state 15
+    expression                     shift and go to state 45
+    simple_expression              shift and go to state 16
+    additive_expression            shift and go to state 18
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+
+state 28
+
+    (20) simple_expression -> additive_expression relop . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+    (28) var -> . VARIABLE
+
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+    VARIABLE        shift and go to state 17
+
+    additive_expression            shift and go to state 46
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+    var                            shift and go to state 47
+
+state 29
+
+    (26) additive_expression -> additive_expression addop . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+    (28) var -> . VARIABLE
+
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+    VARIABLE        shift and go to state 17
+
+    term                           shift and go to state 48
+    factor                         shift and go to state 20
+    var                            shift and go to state 47
+
+state 30
+
+    (22) relop -> LESS .
+
+    NUMERO          reduce using rule 22 (relop -> LESS .)
+    TEXTO           reduce using rule 22 (relop -> LESS .)
+    VARIABLE        reduce using rule 22 (relop -> LESS .)
+
+
+state 31
+
+    (23) relop -> LESSEQUAL .
+
+    NUMERO          reduce using rule 23 (relop -> LESSEQUAL .)
+    TEXTO           reduce using rule 23 (relop -> LESSEQUAL .)
+    VARIABLE        reduce using rule 23 (relop -> LESSEQUAL .)
+
+
+state 32
+
+    (24) relop -> GREATER .
+
+    NUMERO          reduce using rule 24 (relop -> GREATER .)
+    TEXTO           reduce using rule 24 (relop -> GREATER .)
+    VARIABLE        reduce using rule 24 (relop -> GREATER .)
+
+
+state 33
+
+    (25) relop -> GREATEREQUAL .
+
+    NUMERO          reduce using rule 25 (relop -> GREATEREQUAL .)
+    TEXTO           reduce using rule 25 (relop -> GREATEREQUAL .)
+    VARIABLE        reduce using rule 25 (relop -> GREATEREQUAL .)
+
+
+state 34
+
+    (29) addop -> PLUS .
+
+    NUMERO          reduce using rule 29 (addop -> PLUS .)
+    TEXTO           reduce using rule 29 (addop -> PLUS .)
+    VARIABLE        reduce using rule 29 (addop -> PLUS .)
+
+
+state 35
+
+    (30) addop -> MINUS .
+
+    NUMERO          reduce using rule 30 (addop -> MINUS .)
+    TEXTO           reduce using rule 30 (addop -> MINUS .)
+    VARIABLE        reduce using rule 30 (addop -> MINUS .)
+
+
+state 36
+
+    (31) term -> term mulop . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+    (28) var -> . VARIABLE
+
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+    VARIABLE        shift and go to state 17
+
+    factor                         shift and go to state 49
+    var                            shift and go to state 47
+
+state 37
+
+    (33) mulop -> TIMES .
+
+    NUMERO          reduce using rule 33 (mulop -> TIMES .)
+    TEXTO           reduce using rule 33 (mulop -> TIMES .)
+    VARIABLE        reduce using rule 33 (mulop -> TIMES .)
+
+
+state 38
+
+    (34) mulop -> DIVIDE .
+
+    NUMERO          reduce using rule 34 (mulop -> DIVIDE .)
+    TEXTO           reduce using rule 34 (mulop -> DIVIDE .)
+    VARIABLE        reduce using rule 34 (mulop -> DIVIDE .)
+
+
+state 39
+
+    (6) var_declaration -> DIM VARIABLE AS tipo_dato .
+
+    END             reduce using rule 6 (var_declaration -> DIM VARIABLE AS tipo_dato .)
+    DIM             reduce using rule 6 (var_declaration -> DIM VARIABLE AS tipo_dato .)
+    IF              reduce using rule 6 (var_declaration -> DIM VARIABLE AS tipo_dato .)
+
+
+state 40
+
+    (8) tipo_dato -> STRING .
+
+    END             reduce using rule 8 (tipo_dato -> STRING .)
+    DIM             reduce using rule 8 (tipo_dato -> STRING .)
+    IF              reduce using rule 8 (tipo_dato -> STRING .)
+
+
+state 41
+
+    (9) tipo_dato -> DOUBLE .
+
+    END             reduce using rule 9 (tipo_dato -> DOUBLE .)
+    DIM             reduce using rule 9 (tipo_dato -> DOUBLE .)
+    IF              reduce using rule 9 (tipo_dato -> DOUBLE .)
+
+
+state 42
+
+    (10) selection_stmt -> IF expression THEN statement_list . END IF
+    (11) selection_stmt -> IF expression THEN statement_list . selection END IF
+    (14) statement_list -> statement_list . statement
+    (12) selection -> . ELSEIF expression THEN statement_list
+    (13) selection -> . ELSEIF expression THEN statement_list selection
+    (16) statement -> . expression
+    (17) expression -> . var EQUAL expression
+    (18) expression -> . simple_expression
+    (19) expression -> . expression AND expression
+    (28) var -> . VARIABLE
+    (20) simple_expression -> . additive_expression relop additive_expression
+    (21) simple_expression -> . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+
+    END             shift and go to state 51
+    ELSEIF          shift and go to state 54
+    VARIABLE        shift and go to state 17
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+
+    expression                     shift and go to state 50
+    selection                      shift and go to state 52
+    statement                      shift and go to state 53
+    var                            shift and go to state 15
+    simple_expression              shift and go to state 16
+    additive_expression            shift and go to state 18
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+
+state 43
+
+    (15) statement_list -> empty .
+
+    END             reduce using rule 15 (statement_list -> empty .)
+    ELSEIF          reduce using rule 15 (statement_list -> empty .)
+    VARIABLE        reduce using rule 15 (statement_list -> empty .)
+    NUMERO          reduce using rule 15 (statement_list -> empty .)
+    TEXTO           reduce using rule 15 (statement_list -> empty .)
+
+
+state 44
+
+    (19) expression -> expression AND expression .
+    (19) expression -> expression . AND expression
+
+  ! shift/reduce conflict for AND resolved as shift
+    THEN            reduce using rule 19 (expression -> expression AND expression .)
+    END             reduce using rule 19 (expression -> expression AND expression .)
+    ELSEIF          reduce using rule 19 (expression -> expression AND expression .)
+    VARIABLE        reduce using rule 19 (expression -> expression AND expression .)
+    NUMERO          reduce using rule 19 (expression -> expression AND expression .)
+    TEXTO           reduce using rule 19 (expression -> expression AND expression .)
+    AND             shift and go to state 26
+
+  ! AND             [ reduce using rule 19 (expression -> expression AND expression .) ]
+
+
+state 45
+
+    (17) expression -> var EQUAL expression .
+    (19) expression -> expression . AND expression
+
+    THEN            reduce using rule 17 (expression -> var EQUAL expression .)
+    AND             reduce using rule 17 (expression -> var EQUAL expression .)
+    END             reduce using rule 17 (expression -> var EQUAL expression .)
+    ELSEIF          reduce using rule 17 (expression -> var EQUAL expression .)
+    VARIABLE        reduce using rule 17 (expression -> var EQUAL expression .)
+    NUMERO          reduce using rule 17 (expression -> var EQUAL expression .)
+    TEXTO           reduce using rule 17 (expression -> var EQUAL expression .)
+
+  ! AND             [ shift and go to state 26 ]
+
+
+state 46
+
+    (20) simple_expression -> additive_expression relop additive_expression .
+    (26) additive_expression -> additive_expression . addop term
+    (29) addop -> . PLUS
+    (30) addop -> . MINUS
+
+    THEN            reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    AND             reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    END             reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    ELSEIF          reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    VARIABLE        reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    NUMERO          reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    TEXTO           reduce using rule 20 (simple_expression -> additive_expression relop additive_expression .)
+    PLUS            shift and go to state 34
+    MINUS           shift and go to state 35
+
+    addop                          shift and go to state 29
+
+state 47
+
+    (35) factor -> var .
+
+    TIMES           reduce using rule 35 (factor -> var .)
+    DIVIDE          reduce using rule 35 (factor -> var .)
+    PLUS            reduce using rule 35 (factor -> var .)
+    MINUS           reduce using rule 35 (factor -> var .)
+    THEN            reduce using rule 35 (factor -> var .)
+    AND             reduce using rule 35 (factor -> var .)
+    END             reduce using rule 35 (factor -> var .)
+    ELSEIF          reduce using rule 35 (factor -> var .)
+    VARIABLE        reduce using rule 35 (factor -> var .)
+    NUMERO          reduce using rule 35 (factor -> var .)
+    TEXTO           reduce using rule 35 (factor -> var .)
+    LESS            reduce using rule 35 (factor -> var .)
+    LESSEQUAL       reduce using rule 35 (factor -> var .)
+    GREATER         reduce using rule 35 (factor -> var .)
+    GREATEREQUAL    reduce using rule 35 (factor -> var .)
+
+
+state 48
+
+    (26) additive_expression -> additive_expression addop term .
+    (31) term -> term . mulop factor
+    (33) mulop -> . TIMES
+    (34) mulop -> . DIVIDE
+
+    LESS            reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    LESSEQUAL       reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    GREATER         reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    GREATEREQUAL    reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    PLUS            reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    MINUS           reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    THEN            reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    AND             reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    END             reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    ELSEIF          reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    VARIABLE        reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    NUMERO          reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    TEXTO           reduce using rule 26 (additive_expression -> additive_expression addop term .)
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+
+    mulop                          shift and go to state 36
+
+state 49
+
+    (31) term -> term mulop factor .
+
+    TIMES           reduce using rule 31 (term -> term mulop factor .)
+    DIVIDE          reduce using rule 31 (term -> term mulop factor .)
+    LESS            reduce using rule 31 (term -> term mulop factor .)
+    LESSEQUAL       reduce using rule 31 (term -> term mulop factor .)
+    GREATER         reduce using rule 31 (term -> term mulop factor .)
+    GREATEREQUAL    reduce using rule 31 (term -> term mulop factor .)
+    PLUS            reduce using rule 31 (term -> term mulop factor .)
+    MINUS           reduce using rule 31 (term -> term mulop factor .)
+    THEN            reduce using rule 31 (term -> term mulop factor .)
+    AND             reduce using rule 31 (term -> term mulop factor .)
+    END             reduce using rule 31 (term -> term mulop factor .)
+    ELSEIF          reduce using rule 31 (term -> term mulop factor .)
+    VARIABLE        reduce using rule 31 (term -> term mulop factor .)
+    NUMERO          reduce using rule 31 (term -> term mulop factor .)
+    TEXTO           reduce using rule 31 (term -> term mulop factor .)
+
+
+state 50
+
+    (16) statement -> expression .
+    (19) expression -> expression . AND expression
+
+    END             reduce using rule 16 (statement -> expression .)
+    ELSEIF          reduce using rule 16 (statement -> expression .)
+    VARIABLE        reduce using rule 16 (statement -> expression .)
+    NUMERO          reduce using rule 16 (statement -> expression .)
+    TEXTO           reduce using rule 16 (statement -> expression .)
+    AND             shift and go to state 26
+
+
+state 51
+
+    (10) selection_stmt -> IF expression THEN statement_list END . IF
+
+    IF              shift and go to state 55
+
+
+state 52
+
+    (11) selection_stmt -> IF expression THEN statement_list selection . END IF
+
+    END             shift and go to state 56
+
+
+state 53
+
+    (14) statement_list -> statement_list statement .
+
+    END             reduce using rule 14 (statement_list -> statement_list statement .)
+    ELSEIF          reduce using rule 14 (statement_list -> statement_list statement .)
+    VARIABLE        reduce using rule 14 (statement_list -> statement_list statement .)
+    NUMERO          reduce using rule 14 (statement_list -> statement_list statement .)
+    TEXTO           reduce using rule 14 (statement_list -> statement_list statement .)
+
+
+state 54
+
+    (12) selection -> ELSEIF . expression THEN statement_list
+    (13) selection -> ELSEIF . expression THEN statement_list selection
+    (17) expression -> . var EQUAL expression
+    (18) expression -> . simple_expression
+    (19) expression -> . expression AND expression
+    (28) var -> . VARIABLE
+    (20) simple_expression -> . additive_expression relop additive_expression
+    (21) simple_expression -> . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+
+    VARIABLE        shift and go to state 17
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+
+    expression                     shift and go to state 57
+    var                            shift and go to state 15
+    simple_expression              shift and go to state 16
+    additive_expression            shift and go to state 18
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+
+state 55
+
+    (10) selection_stmt -> IF expression THEN statement_list END IF .
+
+    END             reduce using rule 10 (selection_stmt -> IF expression THEN statement_list END IF .)
+    DIM             reduce using rule 10 (selection_stmt -> IF expression THEN statement_list END IF .)
+    IF              reduce using rule 10 (selection_stmt -> IF expression THEN statement_list END IF .)
+
+
+state 56
+
+    (11) selection_stmt -> IF expression THEN statement_list selection END . IF
+
+    IF              shift and go to state 58
+
+
+state 57
+
+    (12) selection -> ELSEIF expression . THEN statement_list
+    (13) selection -> ELSEIF expression . THEN statement_list selection
+    (19) expression -> expression . AND expression
+
+    THEN            shift and go to state 59
+    AND             shift and go to state 26
+
+
+state 58
+
+    (11) selection_stmt -> IF expression THEN statement_list selection END IF .
+
+    END             reduce using rule 11 (selection_stmt -> IF expression THEN statement_list selection END IF .)
+    DIM             reduce using rule 11 (selection_stmt -> IF expression THEN statement_list selection END IF .)
+    IF              reduce using rule 11 (selection_stmt -> IF expression THEN statement_list selection END IF .)
+
+
+state 59
+
+    (12) selection -> ELSEIF expression THEN . statement_list
+    (13) selection -> ELSEIF expression THEN . statement_list selection
+    (14) statement_list -> . statement_list statement
+    (15) statement_list -> . empty
+    (38) empty -> .
+
+    ELSEIF          reduce using rule 38 (empty -> .)
+    VARIABLE        reduce using rule 38 (empty -> .)
+    NUMERO          reduce using rule 38 (empty -> .)
+    TEXTO           reduce using rule 38 (empty -> .)
+    END             reduce using rule 38 (empty -> .)
+
+    statement_list                 shift and go to state 60
+    empty                          shift and go to state 43
+
+state 60
+
+    (12) selection -> ELSEIF expression THEN statement_list .
+    (13) selection -> ELSEIF expression THEN statement_list . selection
+    (14) statement_list -> statement_list . statement
+    (12) selection -> . ELSEIF expression THEN statement_list
+    (13) selection -> . ELSEIF expression THEN statement_list selection
+    (16) statement -> . expression
+    (17) expression -> . var EQUAL expression
+    (18) expression -> . simple_expression
+    (19) expression -> . expression AND expression
+    (28) var -> . VARIABLE
+    (20) simple_expression -> . additive_expression relop additive_expression
+    (21) simple_expression -> . additive_expression
+    (26) additive_expression -> . additive_expression addop term
+    (27) additive_expression -> . term
+    (31) term -> . term mulop factor
+    (32) term -> . factor
+    (35) factor -> . var
+    (36) factor -> . NUMERO
+    (37) factor -> . TEXTO
+
+    END             reduce using rule 12 (selection -> ELSEIF expression THEN statement_list .)
+    ELSEIF          shift and go to state 54
+    VARIABLE        shift and go to state 17
+    NUMERO          shift and go to state 21
+    TEXTO           shift and go to state 22
+
+    expression                     shift and go to state 50
+    selection                      shift and go to state 61
+    statement                      shift and go to state 53
+    var                            shift and go to state 15
+    simple_expression              shift and go to state 16
+    additive_expression            shift and go to state 18
+    term                           shift and go to state 19
+    factor                         shift and go to state 20
+
+state 61
+
+    (13) selection -> ELSEIF expression THEN statement_list selection .
+
+    END             reduce using rule 13 (selection -> ELSEIF expression THEN statement_list selection .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 44 resolved as shift
